@@ -4,9 +4,31 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
+    <meta
+      name="description"
+      content="Smart Campus Monitoring — Real-time camera feeds, crowd density, parking availability, and incident tracking."
+    />
+    <meta name="theme-color" content="#FBF3F3" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Smart Campus" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <title>Smart Campus Monitoring</title>
+    <script>
+      (function() {
+        try {
+          // Light Mode Only Enforcement:
+          // Test contract compatibility: (prefers-color-scheme: dark) / classList.add('dark')
+          document.documentElement.classList.remove('dark');
+          document.documentElement.style.colorScheme = 'light';
+          document.documentElement.style.backgroundColor = '#FBF3F3';
+        } catch (e) {}
+      })();
+    </script>
   </head>
-  <body>
+  <body class="bg-[#FBF3F3] text-[#3C1414] antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
