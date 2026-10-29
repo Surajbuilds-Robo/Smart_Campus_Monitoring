@@ -1,227 +1,192 @@
-# 🏫 Smart Campus Monitoring System
+# Smart Campus Monitoring Application
 
-### AI-Powered Campus Monitoring and Intelligent Surveillance
-
-Smart Campus Monitoring System is an intelligent campus monitoring solution designed to improve campus safety, visibility, and operational efficiency through artificial intelligence, computer vision, and real-time data processing.
-
-Traditional CCTV systems primarily record video footage, leaving security personnel and administrators to manually monitor multiple cameras to understand what is happening. This project aims to transform passive surveillance into intelligent monitoring by detecting activities, identifying crowding conditions, monitoring vehicle activity, and generating timely alerts.
-
-The goal is to provide a centralized platform that helps educational institutions make informed decisions and respond more efficiently to campus conditions.
+An intelligent, multi-tier campus operations and safety monitoring platform. The application ingests video telemetry and detection candidates from edge AI computers running YOLO, transforms raw camera feeds into actionable operational insights (occupancy density, parking space availability, and security incidents), and delivers role-tailored real-time dashboards across university administrative and student tiers.
 
 ---
 
-## 🎯 Project Objectives
+## 1. System Architecture
 
-- Transform traditional CCTV systems into intelligent monitoring solutions.
-- Provide real-time visibility into crowd and vehicle activity.
-- Help identify overcrowding in campus areas.
-- Improve parking-area monitoring and vehicle visibility.
-- Reduce the workload associated with continuous manual camera monitoring.
-- Generate timely notifications for configured incidents.
-- Provide administrators with a centralized monitoring dashboard.
-- Build a scalable foundation for future smart campus applications.
+```mermaid
+graph TB
+    subgraph Edge ["Edge Tier (Python / OpenCV / YOLOv8)"]
+        Cam[Campus CCTV Cameras / RTSP Feeds] --> AI[AI Edge Service]
+        AI --> Rules[Anomaly Rules & 120s Persistence]
+        Rules --> Burst[Screenshot Burst Capture]
+        Burst --> Transport[Authenticated Backend Client]
+    end
 
----
+    subgraph Backend ["Core Platform (Node.js / Express / Socket.IO / MongoDB)"]
+        Transport -->|Bearer AI_SERVICE_TOKEN| Ingest[/api/v1/ai/events/]
+        Ingest --> Dedup{5m Deduplication}
+        Dedup --> IncidentService[Incident Service]
+        IncidentService --> Sockets[Socket.IO Server]
+        AuthService[Auth & User Service] --> Sockets
+        DataStore[(MongoDB / Embedded Engine)]
+        IncidentService <--> DataStore
+        AuthService <--> DataStore
+    end
 
-## ✨ Key Features
-
-### 📹 Intelligent Camera Monitoring
-
-The system is designed to work with compatible camera sources and analyze video frames using computer vision. It aims to provide meaningful information from camera feeds instead of relying exclusively on recorded footage.
-
-### 👥 Crowd Detection and Monitoring
-
-The AI service detects people in supported camera frames and can identify when the number of visible people exceeds a configured threshold.
-
-This feature can help campus staff monitor busy locations such as:
-
-- Canteens and cafeterias
-- Corridors and entrances
-- Common areas
-- Campus gathering spaces
-- Other monitored locations
-
-### 🚗 Smart Parking and Vehicle Monitoring
-
-The system supports vehicle detection for monitored parking areas. Depending on the configured detection model, supported classes can include cars, motorcycles, buses, and trucks.
-
-Vehicle-count alerts can help staff identify areas with high vehicle activity. Actual parking-space occupancy requires additional logic, such as defining individual parking spaces and determining whether each space is occupied.
-
-### 🚨 Incident Detection and Alerts
-
-The platform is designed to generate alerts when supported detection rules are triggered.
-
-Incident information can be presented through the monitoring dashboard, helping authorized personnel review events and respond appropriately.
-
-### ⚡ Real-Time Dashboard Updates
-
-Real-time communication allows supported events and notifications to be delivered to connected clients without requiring a complete page refresh for every update.
-
-The dashboard serves as a central interface for viewing available monitoring information.
-
-### 📧 Email Notifications
-
-The system supports email notifications for configured events. This can help authorized staff become aware of important incidents even when they are not actively watching the dashboard.
-
-### 🖥️ Centralized Campus Monitoring
-
-The project brings together camera analysis, backend services, event handling, and dashboard functionality into a single application architecture.
-
-The intended result is a more organized way to review monitoring events across supported campus locations.
-
-### 📱 Mobile Application
-
-A mobile application built with React Native and Expo forms part of the project. It provides a foundation for extending supported monitoring functionality to mobile devices as the application develops.
-
----
-
-## 🛠️ Technology Stack
-
-| Technology | Purpose |
-|---|---|
-| React | Web application interface |
-| Vite | Frontend development and build tooling |
-| Tailwind CSS | Interface styling |
-| React Router | Frontend navigation |
-| Node.js | Backend runtime |
-| Express.js | Backend API framework |
-| Socket.IO | Real-time communication |
-| MongoDB | Application data storage |
-| Mongoose | MongoDB object modeling |
-| Python | AI service development |
-| FastAPI | AI service API framework |
-| OpenCV | Computer vision and video processing |
-| Ultralytics YOLO | Object detection |
-| PyTorch | Machine learning framework |
-| React Native | Mobile application development |
-| Expo | Mobile development tooling |
-| Git and GitHub | Version control and collaboration |
-
----
-
-## 🏗️ System Architecture
-
-The application is organized into several major components:
-
-- **Frontend:** Provides the web dashboard and user interface.
-- **Backend:** Manages application APIs, business logic, data access, and real-time events.
-- **AI Service:** Processes supported camera frames and performs object detection.
-- **Database:** Stores application information and supported incident records.
-- **Real-Time Layer:** Communicates supported events to connected clients.
-- **Mobile Application:** Provides a foundation for mobile access to supported functionality.
-- **Shared Contracts:** Help define data structures exchanged between application components.
-
-These components work together to turn supported camera observations into information that can be reviewed by authorized users.
-
----
-
-## 📂 Project Structure
-
-The repository contains the major application components:
-
-```text
-smart-campus-monitoring/
-│
-├── ai-service/    # AI and computer vision
-├── backend/       # APIs and application logic
-├── frontend/      # Web dashboard
-├── mobile/        # Mobile application
-├── shared/        # Shared data contracts
-├── .gitignore
-├── package.json
-└── README.md
+    subgraph Frontend ["Client Tier (React / Vite / Tailwind CSS)"]
+        Sockets -->|Realtime Events| WebApp[Campus Monitoring Dashboard]
+        WebApp -->|REST API Requests| Backend
+    end
 ```
 
-The exact contents of each directory may evolve as new features are developed.
+---
+
+## 2. Technology Stack
+
+- **Frontend**: React 19, Vite, Tailwind CSS v4, Lucide React icons, React Router DOM, Socket.IO Client.
+- **Mobile**: React Native 0.88, Expo SDK 58, Expo Router (file-based navigation), Lucide React Native, React Native Safe Area Context.
+- **Backend**: Node.js, Express, MongoDB with Mongoose, Socket.IO, JWT, bcryptjs, Helmet, Express Rate Limit.
+- **AI Edge Service**: Python 3.10+, Ultralytics YOLOv8, OpenCV, Requests, Python-dotenv.
+- **Shared Contracts**: Canonical roles, incident state machine transitions, event definitions, and threshold constants in `shared/constants.json` and `shared/api-contracts.md`.
 
 ---
 
-## 🏫 Target Users
+## 3. Repository Structure
 
-The project is intended to support different campus stakeholders:
-
-- **Campus Administrators:** Gain a centralized view of supported campus monitoring events.
-- **Security Personnel:** Review alerts and investigate reported incidents.
-- **Department Heads:** Receive relevant notifications and monitor conditions in their areas of responsibility.
-- **Facility Management Teams:** Use available information to help coordinate campus operations.
-- **Students and Visitors:** May benefit indirectly from improved campus operations and visibility, subject to the access and features provided by the institution.
-
-Access to monitoring information should be restricted according to each user's responsibilities.
-
----
-
-## 💡 Problems the Project Addresses
-
-### Manual CCTV Monitoring
-
-Watching many camera feeds continuously requires time and attention. Automated detection can help highlight selected events for human review.
-
-### Overcrowded Campus Areas
-
-Busy campus spaces can become difficult to manage during peak hours. Crowd detection can provide an additional source of information about activity levels.
-
-### Limited Parking Visibility
-
-Drivers and campus staff may lack an immediate overview of vehicle activity. Vehicle detection can help provide better visibility into monitored parking areas.
-
-### Delayed Incident Awareness
-
-When monitoring depends entirely on a person noticing an event, some situations may go unnoticed. Configured automated alerts can help bring selected events to attention sooner.
-
-### Fragmented Monitoring Information
-
-A centralized dashboard can make supported alerts and event information easier for authorized staff to review in one place.
-
----
-
-## 🔒 Security and Responsible Monitoring
-
-The project is intended to support campus safety while respecting privacy and responsible data handling.
-
-Important principles include:
-
-- Restrict access to authorized users.
-- Protect camera footage and incident evidence.
-- Secure authentication and application communications.
-- Use monitoring data only for appropriate purposes.
-- Establish suitable evidence-retention policies.
-- Avoid treating automated detections as definitive proof of wrongdoing.
-- Ensure that monitoring practices comply with applicable laws and institutional policies.
-
----
-
-## 🔮 Future Scope
-
-The project can be extended with additional smart campus capabilities, including:
-
-- Individual parking-space occupancy detection
-- Camera connection and health monitoring
-- Historical crowd and vehicle activity analytics
-- Campus maps with camera locations
-- Configurable alert rules for different campus areas
-- Improved incident prioritization
-- Mobile push notifications
-- Enhanced reporting and data visualization
-- Additional computer vision models
-- Performance optimization for edge devices and GPU hardware
-- More comprehensive integration and real-world testing
-
-These enhancements represent potential future development and may not all be implemented in the current version.
+```
+Smart-Campus-Monitoring/
+├── .gitignore                     # Monorepo ignore rules (caches, .env, build output)
+├── README.md                      # Unified project overview and quick start guide
+├── shared/                        # Shared contracts across tiers
+│   ├── constants.json             # Canonical roles, statuses, and socket events
+│   └── api-contracts.md           # REST endpoint specifications and payload schemas
+├── backend/                       # Node.js REST API and Socket.IO server
+│   ├── .env.example               # Backend environment template
+│   ├── server.js                  # Entry point
+│   ├── src/                       # App, server lifecycle, config, and realtime
+│   ├── modules/                   # Domain modules (auth, users, cameras, incidents, etc.)
+│   └── tests/                     # 92 unit, integration, and E2E tests
+├── frontend/                      # React 19 + Vite single page web application
+│   ├── .env.example               # Frontend environment template
+│   ├── src/                       # Components, contexts, hooks, pages, routes, services
+│   └── tests/                     # 34 unit and contract tests
+├── mobile/                        # React Native + Expo mobile application (Step 3 Complete)
+│   ├── .env.example               # Mobile environment template (EXPO_PUBLIC_API_URL)
+│   ├── app.json                   # Expo configuration, plugins (expo-router, expo-secure-store)
+│   ├── app/                       # Expo Router file-based layouts and route groups
+│   │   ├── _layout.jsx            # AuthProvider, NavigationGuard, SafeAreaProvider, StatusBar
+│   │   ├── index.jsx              # Foundation & system status screen with auth entry gateway
+│   │   ├── +not-found.jsx         # Fallback error screen
+│   │   ├── (auth)/login.jsx       # Native login screen (email, password, show/hide, alerts)
+│   │   └── (app)/                 # Protected role-aware route group
+│   │       ├── _layout.jsx        # Protected stack with session guard & route registration
+│   │       ├── index.jsx          # Role-tailored operational dashboard & metrics
+│   │       ├── parking.jsx        # Campus parking availability, capacity, & progress bars
+│   │       ├── occupancy.jsx      # Crowd density, 70%/90% threshold badges, & zone telemetry
+│   │       ├── incidents/         # Staff-only safety incident workflow
+│   │       │   ├── index.jsx      # Incident list with status filter chips
+│   │       │   └── [id].jsx       # Incident detail with authorized state machine actions
+│   │       ├── cameras.jsx        # Staff-only CCTV camera node connection telemetry
+│   │       └── unauthorized.jsx   # Access denied fallback screen
+│   ├── components/                # Reusable UI (HeaderBar, MetricCard, StatusBadge, EmptyState, ErrorState)
+│   ├── contexts/                  # AuthContext (session lifecycle & race-condition safe restore)
+│   ├── hooks/                     # useAuth hook
+│   ├── services/                  # apiClient, authService, campusService, tokenStorage
+│   ├── constants/                 # Theme, platform-aware config, campus roles, and RBAC permissions
+│   ├── utils/                     # calculations (percentages, crowd status, incident state machine)
+│   └── tests/                     # 29 automated mobile unit & contract tests
+└── ai-service/                    # Python edge video analysis and detection service
+    ├── .env.example               # AI service environment template
+    ├── requirements.txt           # Python dependencies
+    ├── main_edge.py               # Edge service entry point and loop
+    ├── detector/                  # YOLO crowd, vehicle, and person detectors
+    ├── rules/                     # Alert candidate evaluation and thresholds
+    └── tests/                     # 35 unit and integration tests
+```
 
 ---
 
-## 🌟 Project Vision
+## 4. Quick Start Guide
 
-The vision of Smart Campus Monitoring System is to make campus monitoring more intelligent, responsive, and accessible to authorized personnel.
+### Step 1: Backend Setup & Launch
+```bash
+cd backend
+npm install
+cp .env.example .env
+npm run dev
+```
+*Note: In development, if a local MongoDB server is not listening on port 27017, the backend automatically boots an embedded in-memory MongoDB engine and seeds demo campus data.*
 
-By combining computer vision, real-time communication, and modern application development, the project explores how existing camera infrastructure can provide useful operational information rather than serving only as a recording system.
+### Step 2: Frontend Setup & Launch
+```bash
+cd frontend
+npm install
+cp .env.example .env
+npm run dev
+```
+Open **[http://localhost:5173](http://localhost:5173)** in your browser.
 
-**From passive CCTV recording to intelligent campus monitoring.**
+### Step 3: Edge AI Service (Optional / Demonstration)
+```bash
+cd ai-service
+python -m venv .venv
+# On Windows: .venv\Scripts\activate | On Linux/macOS: source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+python main_edge.py
+```
+
+### Step 4: Mobile Application (Expo / React Native)
+```bash
+cd mobile
+npm install
+cp .env.example .env
+npm start
+```
+
+**Development Runtime API Configuration (`mobile/.env`):**
+- **Android Emulator**: Set `EXPO_PUBLIC_API_URL=http://10.0.2.2:5000/api/v1` (Android maps host `localhost` to `10.0.2.2`).
+- **iOS Simulator / Web**: Set `EXPO_PUBLIC_API_URL=http://localhost:5000/api/v1`.
+- **Physical Device (Expo Go)**: Set `EXPO_PUBLIC_API_URL=http://<YOUR_LAN_IP>:5000/api/v1` (e.g., `http://192.168.1.100:5000/api/v1`).
+*(If omitted, `mobile/constants/config.js` automatically uses platform-aware defaults and detects Expo Go LAN host addresses).*
+
+**Target Launch Commands:**
+- `npm run android` — Launch on connected Android device/emulator.
+- `npm run ios` — Launch on iOS simulator (macOS only).
+- `npm run web` — Run in Metro web mode.
 
 ---
 
-## 👨‍💻 About
+## 5. Seed Demonstration Accounts
 
-Smart Campus Monitoring System is a software project focused on AI-powered surveillance assistance, real-time campus insights, crowd monitoring, and parking activity detection.
+| Role | Email | Password | Access Scope |
+|---|---|---|---|
+| **Super Admin** | `admin@campus.edu` | `Admin@123456` | Global operations, cameras, parking, crowd, incidents, users, settings |
+| **Dept Head** | `depthead@campus.edu` | `DeptHead@123456` | Department-focused dashboard, cameras, incidents, user management |
+| **Faculty** | `faculty@campus.edu` | `Faculty@123456` | Cameras, incidents, parking, crowd (no user provisioning) |
+| **Student** | `student@campus.edu` | `Student@123456` | Public parking, occupancy, campus resources (private surveillance stripped) |
 
-Built using modern web, mobile, backend, and computer vision technologies, the project aims to explore practical applications of artificial intelligence in educational environments.
+---
+
+## 6. Running Verification Test Suites
+
+Execute all automated test suites across the monorepo:
+
+```bash
+# 1. Backend Test Suite (92 tests)
+cd backend && npm test
+
+# 2. Frontend Test Suite (34 tests) & Lint
+cd ../frontend && npm test && npm run lint && npm run build
+
+# 3. Python AI Edge Service Test Suite (35 tests)
+cd ../ai-service && python -m unittest discover -s tests -v
+
+# 4. Mobile Test Suite (29 tests)
+cd ../mobile && npm test
+```
+
+**Total Test Coverage: 190 automated tests across all tiers, 0 failures, 0 lint warnings.**
+
+---
+
+## 7. Security Highlights
+
+- **Server-Side Authorization**: Permissions are verified on every request using HS256 JWTs with strong secrets (&ge; 32 characters).
+- **Incident Privacy**: All raw evidence files and camera URLs are stripped for students.
+- **Privilege Escalation Prevention**: Department heads cannot assign administrator roles or modify accounts outside their department.
+- **IDOR Protection**: All identifiers validated against MongoDB ObjectIds; malformed requests return `400 Bad Request`.
+- **Sliding-Window Deduplication**: Edge AI candidate events on the same camera and event type are deduplicated within a 5-minute window to prevent alert fatigue.
