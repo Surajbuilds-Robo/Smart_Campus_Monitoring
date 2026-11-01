@@ -1,0 +1,27 @@
+# Virtual environment
+.venv/
+env/
+venv/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Runtime evidence and video captures
+evidence/
+*.mp4
+*.avi
+*.mkv
+*.jpg
+*.jpeg
+*.png
+
+# Logs
+*.log
