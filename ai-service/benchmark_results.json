@@ -1,0 +1,98 @@
+[
+  {
+    "model_label": "YOLOv8n (Current Baseline)",
+    "model_path": "yolov8n.pt",
+    "file_size_mb": 6.25,
+    "parameters": 3157200,
+    "load_time_ms": 107.48,
+    "model_ram_mb": 18.04,
+    "latency_mean_ms": 100.76,
+    "latency_median_ms": 89.28,
+    "latency_p95_ms": 168.72,
+    "latency_min_ms": 76.59,
+    "latency_max_ms": 262.96,
+    "fps": 9.92,
+    "avg_cpu_percent": 820.4,
+    "avg_persons_detected": 0.0,
+    "avg_vehicles_detected": 0.03,
+    "avg_confidence": 0.0,
+    "multi_cam": {
+      "2_cameras_aggregate_fps": 8.84,
+      "2_cameras_fps_per_cam": 4.42,
+      "4_cameras_aggregate_fps": 7.24,
+      "4_cameras_fps_per_cam": 1.81
+    }
+  },
+  {
+    "model_label": "YOLO26n (Candidate - Preferred)",
+    "model_path": "yolo26n.pt",
+    "file_size_mb": 5.29,
+    "parameters": 2572280,
+    "load_time_ms": 127.63,
+    "model_ram_mb": 4.27,
+    "latency_mean_ms": 78.65,
+    "latency_median_ms": 77.77,
+    "latency_p95_ms": 91.0,
+    "latency_min_ms": 68.69,
+    "latency_max_ms": 91.65,
+    "fps": 12.72,
+    "avg_cpu_percent": 859.1,
+    "avg_persons_detected": 0.0,
+    "avg_vehicles_detected": 0.07,
+    "avg_confidence": 0.0,
+    "multi_cam": {
+      "2_cameras_aggregate_fps": 7.88,
+      "2_cameras_fps_per_cam": 3.94,
+      "4_cameras_aggregate_fps": 7.06,
+      "4_cameras_fps_per_cam": 1.77
+    }
+  },
+  {
+    "model_label": "YOLO26s (Candidate - Small)",
+    "model_path": "yolo26s.pt",
+    "file_size_mb": 19.48,
+    "parameters": 10009784,
+    "load_time_ms": 137.3,
+    "model_ram_mb": 22.54,
+    "latency_mean_ms": 168.06,
+    "latency_median_ms": 163.15,
+    "latency_p95_ms": 206.76,
+    "latency_min_ms": 141.55,
+    "latency_max_ms": 224.83,
+    "fps": 5.95,
+    "avg_cpu_percent": 832.0,
+    "avg_persons_detected": 0.0,
+    "avg_vehicles_detected": 0.0,
+    "avg_confidence": 0.0,
+    "multi_cam": {
+      "2_cameras_aggregate_fps": 4.4,
+      "2_cameras_fps_per_cam": 2.2,
+      "4_cameras_aggregate_fps": 4.24,
+      "4_cameras_fps_per_cam": 1.06
+    }
+  },
+  {
+    "model_label": "YOLO11n (Reference)",
+    "model_path": "yolo11n.pt",
+    "file_size_mb": 5.35,
+    "parameters": 2624080,
+    "load_time_ms": 122.65,
+    "model_ram_mb": 0.0,
+    "latency_mean_ms": 86.31,
+    "latency_median_ms": 86.3,
+    "latency_p95_ms": 106.04,
+    "latency_min_ms": 70.19,
+    "latency_max_ms": 107.78,
+    "fps": 11.59,
+    "avg_cpu_percent": 868.5,
+    "avg_persons_detected": 0.0,
+    "avg_vehicles_detected": 0.0,
+    "avg_confidence": 0.0,
+    "multi_cam": {
+      "2_cameras_aggregate_fps": 9.5,
+      "2_cameras_fps_per_cam": 4.75,
+      "4_cameras_aggregate_fps": 8.17,
+      "4_cameras_fps_per_cam": 2.04
+    }
+  }
+]
