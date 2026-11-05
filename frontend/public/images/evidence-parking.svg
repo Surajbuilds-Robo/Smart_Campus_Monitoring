@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 140" width="100%" height="100%">
+  <!-- Parking Lot Asphalt -->
+  <rect width="240" height="140" fill="#334155" />
+
+  <!-- Yellow Diagonal Hatching for Restricted Loading / Fire Lane Zone -->
+  <g stroke="#eab308" stroke-width="2" opacity="0.9">
+    <line x1="30" y1="30" x2="110" y2="110" />
+    <line x1="45" y1="30" x2="125" y2="110" />
+    <line x1="60" y1="30" x2="140" y2="110" />
+    <line x1="75" y1="30" x2="155" y2="110" />
+    <line x1="90" y1="30" x2="170" y2="110" />
+    <line x1="105" y1="30" x2="185" y2="110" />
+  </g>
+
+  <!-- Surrounding normal parking lines -->
+  <line x1="15" y1="30" x2="225" y2="30" stroke="#f8fafc" stroke-width="2" />
+  <line x1="15" y1="110" x2="225" y2="110" stroke="#f8fafc" stroke-width="2" />
+
+  <!-- Illegally Parked Car parked across yellow zone -->
+  <g transform="translate(75, 45)">
+    <rect x="0" y="0" width="80" height="50" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1.5" />
+    <!-- Roof and windshield -->
+    <rect x="18" y="10" width="44" height="30" rx="4" fill="#0f172a" />
+    <rect x="22" y="13" width="36" height="24" rx="2" fill="#38bdf8" opacity="0.5" />
+    <!-- Headlights -->
+    <circle cx="78" cy="12" r="3" fill="#fef08a" />
+    <circle cx="78" cy="38" r="3" fill="#fef08a" />
+  </g>
+
+  <!-- Blue AI Bounding Box for unauthorized parking -->
+  <rect x="68" y="38" width="94" height="64" rx="6" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4,2" />
+  <rect x="68" y="28" width="80" height="10" rx="2" fill="#3b82f6" />
+  <text x="71" y="36" font-family="monospace" font-size="7" fill="#ffffff" font-weight="bold">AI: NO PARKING ZONE 92%</text>
+
+  <!-- CCTV timestamp -->
+  <rect x="155" y="6" width="78" height="14" rx="2" fill="#0f172a" opacity="0.8" />
+  <text x="160" y="16" font-family="monospace" font-size="8" fill="#f8fafc">16:52:48 SEC</text>
+</svg>

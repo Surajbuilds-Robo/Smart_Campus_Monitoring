@@ -1,0 +1,99 @@
+
+{
+  "app": {
+    "name": "Smart Campus Monitoring",
+    "version": "1.0.0",
+    "apiPrefix": "/api/v1"
+  },
+  "roles": {
+    "SUPER_ADMIN": "SUPER_ADMIN",
+    "SECURITY": "SECURITY",
+    "DEPT_HEAD": "DEPT_HEAD",
+    "FACULTY": "FACULTY",
+    "STUDENT": "STUDENT"
+  },
+  "incident": {
+    "statuses": [
+      "new",
+      "acknowledged",
+      "investigating",
+      "resolved",
+      "dismissed"
+    ],
+    "severities": [
+      "info",
+      "warning",
+      "high",
+      "critical"
+    ],
+    "eventTypes": [
+      "crowd_overcrowding",
+      "parking_violation",
+      "fall",
+      "violence",
+      "other"
+    ],
+    "transitions": {
+      "new": ["acknowledged", "dismissed"],
+      "acknowledged": ["investigating", "resolved", "dismissed"],
+      "investigating": ["resolved", "dismissed"],
+      "resolved": [],
+      "dismissed": []
+    }
+  },
+  "camera": {
+    "statuses": [
+      "online",
+      "offline",
+      "maintenance"
+    ]
+  },
+  "parking": {
+    "statuses": [
+      "available",
+      "full",
+      "unavailable"
+    ]
+  },
+  "occupancy": {
+    "levels": [
+      "normal",
+      "warning",
+      "critical"
+    ],
+    "warningThreshold": 0.7,
+    "criticalThreshold": 0.9
+  },
+  "notifications": {
+    "types": [
+      "incident_created",
+      "incident_updated",
+      "incident_assigned",
+      "camera_status",
+      "occupancy_warning",
+      "system_alert"
+    ]
+  },
+  "socketEvents": {
+    "connectionReady": "connection:ready",
+    "incidentCreated": "incident:created",
+    "incidentUpdated": "incident:updated",
+    "cameraStatus": "camera:status",
+    "occupancyUpdated": "occupancy:updated",
+    "parkingUpdated": "parking:updated",
+    "notificationCreated": "notification:created"
+  },
+  "retention": {
+    "evidenceDays": 30
+  },
+  "http": {
+    "success": 200,
+    "created": 201,
+    "badRequest": 400,
+    "unauthorized": 401,
+    "forbidden": 403,
+    "notFound": 404,
+    "conflict": 409,
+    "serverError": 500
+  }
+}

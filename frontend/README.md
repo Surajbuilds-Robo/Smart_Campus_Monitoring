@@ -1,6 +1,6 @@
 # Smart Campus Monitoring — Frontend Web Application
 
-The frontend is a modern, responsive, role-aware single-page application built with **React**, **Vite**, **Tailwind CSS**, and **Socket.IO Client**. It provides operational visibility into campus surveillance, parking strucACtures, crowd occupancy, safety incidents, and administrative workflows.
+The frontend is a modern, responsive, role-aware single-page application built with **React**, **Vite**, **Tailwind CSS**, and **Socket.IO Client**. It provides operational visibility into campus surveillance, parking structures, crowd occupancy, safety incidents, and administrative workflows.
 
 ---
 

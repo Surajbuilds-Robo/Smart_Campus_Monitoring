@@ -1,0 +1,127 @@
+{
+  "activeVersion": "v3.0.0-light-dusty-rose",
+  "previousVersion": "v1.0.0-classic-campus-slate-blue",
+  "versions": [
+    {
+      "versionId": "v1.0.0-classic-campus-slate-blue",
+      "name": "Classic Campus Slate & Blue",
+      "timestamp": "2026-10-23T12:00:00.000Z",
+      "description": "Original light/dark slate and royal blue theme.",
+      "tokens": {
+        "--color-jet-black": "#0f172a",
+        "--color-cerulean-blue": "#2563eb",
+        "--color-neon-rose": "#f43f5e",
+        "--color-background": "#f8fafc",
+        "--color-surface": "#ffffff",
+        "--color-surface-elevated": "#f1f5f9",
+        "--color-primary": "#2563eb",
+        "--color-primary-hover": "#1d4ed8",
+        "--color-accent": "#3b82f6",
+        "--color-accent-hover": "#2563eb",
+        "--color-text-primary": "#0f172a",
+        "--color-text-secondary": "#64748b",
+        "--color-border": "#e2e8f0",
+        "--color-success": "#10b981",
+        "--color-warning": "#f59e0b",
+        "--color-danger": "#ef4444",
+        "--color-info": "#2563eb",
+        "colorScheme": "light"
+      }
+    },
+    {
+      "versionId": "v2.0.0-jetblack-cerulean-neonrose",
+      "name": "Jet Black, Cerulean Blue & Neon Rose",
+      "timestamp": "2026-10-24T00:00:00.000Z",
+      "description": "High-contrast tactical surveillance theme with Jet Black (#0A0A0A), Cerulean Blue (#007BA7), and Neon Rose (#FF2D95).",
+      "tokens": {
+        "--color-jet-black": "#0A0A0A",
+        "--color-cerulean-blue": "#007BA7",
+        "--color-neon-rose": "#FF2D95",
+        "--color-background": "#0A0A0A",
+        "--color-surface": "#141414",
+        "--color-surface-elevated": "#1D1D1D",
+        "--color-primary": "#007BA7",
+        "--color-primary-hover": "#0091c5",
+        "--color-accent": "#FF2D95",
+        "--color-accent-hover": "#ff4daa",
+        "--color-text-primary": "#FFFFFF",
+        "--color-text-secondary": "#B8C0CC",
+        "--color-border": "#303642",
+        "--color-success": "#10b981",
+        "--color-warning": "#f59e0b",
+        "--color-danger": "#ef4444",
+        "--color-info": "#007ba7",
+        "colorScheme": "dark"
+      }
+    },
+    {
+      "versionId": "v3.0.0-light-dusty-rose",
+      "name": "Dusty Rose & Deep Burgundy Light Dashboard",
+      "timestamp": "2026-10-24T01:30:00.000Z",
+      "description": "Light-only campus theme with Blush White (#FBF3F3), Deep Burgundy (#3C1414), Dusty Mauve (#806B6A), Slate Gray (#76808D), Muted Rose (#B26262), and Soft Khaki (#8C8C7C).",
+      "tokens": {
+        "--color-blush-white": "#FBF3F3",
+        "--color-deep-burgundy": "#3C1414",
+        "--color-dusty-mauve": "#806B6A",
+        "--color-slate-gray": "#76808D",
+        "--color-muted-rose": "#B26262",
+        "--color-soft-khaki": "#8C8C7C",
+        "--app-background": "#FBF3F3",
+        "--surface-primary": "#FFFFFF",
+        "--surface-secondary": "#F6EDED",
+        "--surface-hover": "#F0E3E3",
+        "--text-primary": "#3C1414",
+        "--text-secondary": "#806B6A",
+        "--border-default": "#E5D6D6",
+        "--accent-primary": "#B26262",
+        "--accent-secondary": "#8C8C7C",
+        "--severity-high": "#C62828",
+        "--severity-medium": "#A66A00",
+        "--severity-low": "#287A43",
+        "--color-background": "#FBF3F3",
+        "--color-surface": "#FFFFFF",
+        "--color-surface-elevated": "#F6EDED",
+        "--color-primary": "#B26262",
+        "--color-primary-hover": "#9E5353",
+        "--color-accent": "#8C8C7C",
+        "--color-text-primary": "#3C1414",
+        "--color-text-secondary": "#806B6A",
+        "--color-border": "#E5D6D6",
+        "--color-success": "#287A43",
+        "--color-warning": "#A66A00",
+        "--color-danger": "#C62828",
+        "--color-info": "#B26262",
+        "colorScheme": "light"
+      }
+    }
+  ],
+  "history": [
+    {
+      "action": "INIT_THEME",
+      "versionId": "v1.0.0-classic-campus-slate-blue",
+      "timestamp": "2026-10-23T12:00:00.000Z",
+      "description": "Initialized default Smart Campus theme."
+    },
+    {
+      "action": "APPLY_THEME",
+      "versionId": "v2.0.0-jetblack-cerulean-neonrose",
+      "fromVersionId": "v1.0.0-classic-campus-slate-blue",
+      "timestamp": "2026-10-24T00:00:00.000Z",
+      "description": "Applied Jet Black (#0A0A0A), Cerulean Blue (#007BA7), and Neon Rose (#FF2D95) palette."
+    },
+    {
+      "action": "REDO_THEME",
+      "restoredVersionId": "v1.0.0-classic-campus-slate-blue",
+      "previousActiveVersion": "v2.0.0-jetblack-cerulean-neonrose",
+      "timestamp": "2026-10-23T18:49:03.847Z",
+      "description": "Restored theme 'Classic Campus Slate & Blue' via redo command."
+    },
+    {
+      "action": "APPLY_THEME",
+      "versionId": "v3.0.0-light-dusty-rose",
+      "fromVersionId": "v1.0.0-classic-campus-slate-blue",
+      "timestamp": "2026-10-24T01:30:00.000Z",
+      "description": "Applied Light-Only Dusty Rose & Deep Burgundy theme with incident severity tokens."
+    }
+  ]
+}

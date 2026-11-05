@@ -3,6 +3,7 @@ node_modules/
 .venv/
 env/
 venv/
+frontend/public/videos/1.mp4
 
 # Secrets and environment configurations
 .env
